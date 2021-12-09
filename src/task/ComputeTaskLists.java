@@ -26,17 +26,17 @@ public class ComputeTaskLists {
     }
   }
 
-  // Helper function for filtering out all the urgent tasks (tasks with deadlines) from
-  // all sorted tasks
-  private void initializeUrgentTasks() {
-    this.urgentTasks = this.allTasks.stream().filter((task) -> (task.getDeadline() != null)).collect(
-        Collectors.toList());
-  }
-
   // Helper function for filtering out all the important tasks (tasks without deadlines) from
   // all sorted tasks
   private void initializeImportantTasks() {
     this.importantTasks = this.allTasks.stream().filter((task) -> (task.getDeadline() == null)).collect(
+        Collectors.toList());
+  }
+
+  // Helper function (that's called in our main methods in TaskManagement and TaskManagementTesting)
+  // for filtering out all the urgent tasks (tasks with deadlines) from all sorted tasks
+  public void initializeUrgentTasks() {
+    this.urgentTasks = this.allTasks.stream().filter((task) -> (task.getDeadline() != null)).collect(
         Collectors.toList());
   }
 
@@ -46,19 +46,7 @@ public class ComputeTaskLists {
   }
 
   // Gets all the urgent tasks from all tasks (urgent tasks are tasks with deadlines)
-  // (for debugging)
   public List<Task> getUrgentTasks() {
-    // Filter out all the urgent tasks from all tasks
-    this.initializeUrgentTasks();
-    return this.urgentTasks;
-  }
-
-  // Gets all the sorted urgent tasks (by their deadlines) after calling sortUrgentTasks() method
-  public List<Task> getSortedUrgentTasks() {
-    // Filter out all the urgent tasks from all tasks
-    this.initializeUrgentTasks();
-    // Call sortUrgentTasks() method
-    this.sortUrgentTasks();
     return this.urgentTasks;
   }
 
@@ -93,7 +81,7 @@ public class ComputeTaskLists {
   // If there are urgent tasks that conflict with each other, with respect to an urgent task's
   // deadline and latest start time, then we call a helper function to adjust the latest start times
   // for conflicting urgent tasks appropriately.
-  private void sortUrgentTasks() {
+  public void sortUrgentTasks() {
     // Sorts the urgent tasks by their deadlines and if some urgent tasks have the same deadlines,
     // then we sort those urgent tasks by their importance score
     // (for debugging purposes)
@@ -183,16 +171,6 @@ public class ComputeTaskLists {
       printUrgentTasksResult.append("\n");
     }
     return printUrgentTasksResult.toString();
-  }
-
-  // Prints sorted urgent tasks
-  public String printSortedUrgentTasks() {
-    StringBuilder printSortedUrgentTasksResult = new StringBuilder();
-    for (Task urgentTask: getSortedUrgentTasks()) {
-      printSortedUrgentTasksResult.append(urgentTask.toString());
-      printSortedUrgentTasksResult.append("\n");
-    }
-    return printSortedUrgentTasksResult.toString();
   }
 
   // Prints important tasks
