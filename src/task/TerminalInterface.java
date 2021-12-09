@@ -11,15 +11,17 @@ import java.util.Scanner;
 public class TerminalInterface {
     BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     List<Task> list = new ArrayList<>();
+    List<Task> historyTaskList = new ArrayList<>();
     ComputeTaskLists computeTaskLists;
 
     public void homePage() {
         System.out.println("\n---------------------------------------------------");
         System.out.println("What do you want to do now？\n" +
                             "1. Recommend a task to complete now\n" +
-                            "2. Print all the tasks\n" +
+                            "2. Print the task list you have not done\n" +
                             "3. Would you like to add more tasks? \n" +
-                            "4. quit the program");
+                            "4. Print the task list you input in our system \n" +
+                            "q. quit the program");
     }
 
     public void programStart() throws IOException, ParseException {
@@ -41,7 +43,6 @@ public class TerminalInterface {
                     homePage();
                     break;
                 case "2":
-                    System.out.println("The tasks list is:");
                     String result = computeTaskLists.printAllTasks();
                     System.out.println(result);
                     homePage();
@@ -51,6 +52,12 @@ public class TerminalInterface {
                     homePage();
                     break;
                 case "4":
+                    for (int i = 0; i < historyTaskList.size(); i++) {
+                        System.out.println(historyTaskList.get(i));
+                    }
+                    homePage();
+                    break;
+                case "q":
                     System.out.println("bye!");
                     return;
                 default:
@@ -82,6 +89,7 @@ public class TerminalInterface {
             }
             Task task = new Task(taskName, importance, duration, deadline);
             list.add(task);
+            historyTaskList.add(task);
             number++;
         }
         computeTaskLists = new ComputeTaskLists(list);
