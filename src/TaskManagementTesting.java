@@ -66,12 +66,17 @@ public class TaskManagementTesting {
     // Call ComputeTaskLists class
     ComputeTaskLists computeTaskLists = new ComputeTaskLists(allTasks1);
 
-    // Sort all tasks in allTasks1 list by their importance score from highest to lowest
+    // Sort all tasks in allTasks1 list by their importance scores from highest to lowest
     // (using merge sort)
-    // Print all the tasks in sorted order (by importance)
     computeTaskLists.sortAllTasks();
+    // Get all the tasks in sorted order (by their importance scores)
+    // Print all the tasks
     System.out.println("************ ALL TASKS IN SORTED ORDER BY IMPORTANCE ************");
     System.out.println(computeTaskLists.printAllTasks());
+
+    // Call initializeUrgentTasks() to initialize the urgent tasks (filters urgent tasks out from
+    // allTasks1 list)
+    computeTaskLists.initializeUrgentTasks();
 
     // Get all the urgent tasks from all tasks (allTasks1 list)
     // Print all the urgent tasks
@@ -83,10 +88,14 @@ public class TaskManagementTesting {
     System.out.println("************ IMPORTANT TASKS ************");
     System.out.println(computeTaskLists.printImportantTasks());
 
-    // Get all the urgent tasks in sorted order (sort urgent tasks by their deadlines)
-    // Print all the urgent tasks in sorted order (by their deadlines)
+    // Call sortUrgentTasks() method to sort all the urgent tasks by their deadlines from earliest
+    // to latest
+    computeTaskLists.sortUrgentTasks();
+
+    // Get all the urgent tasks in sorted order (by their deadlines)
+    // Print all the sorted urgent tasks
     System.out.println("************ URGENT TASKS IN SORTED ORDER ************");
-    System.out.println(computeTaskLists.printSortedUrgentTasks());
+    System.out.println(computeTaskLists.printUrgentTasks());
 
     // Print the recommended task for the user to complete now
     System.out.println("************ RECOMMENDED TASK TO COMPLETE NOW ************");
