@@ -19,6 +19,11 @@ public class ComputeTaskLists {
 
   public ComputeTaskLists(List<Task> allTasks) {
     this.allTasks = allTasks;
+    sortAllTasks();
+    getUrgentTasks();
+    if (urgentTasks.size() > 0) {
+      sortUrgentTasks();
+    }
   }
 
   // Helper function for filtering out all the urgent tasks (tasks with deadlines) from
@@ -123,15 +128,40 @@ public class ComputeTaskLists {
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM-dd-yyyy HH:mm");
     System.out.println("Current date and time: " + simpleDateFormat.format(currentDate));
 
-
-    if (currentTime + this.allTasks.get(0).getDuration() < this.urgentTasks.get(0).getLatestStartTime()) {
-      return this.allTasks.get(0);
+    if (allTasks.size() > 0) {
+      if (urgentTasks.size() == 0){
+        Task result = allTasks.get(0);
+        remove(result);
+        return result;
+      } else if (currentTime + this.allTasks.get(0).getDuration() < this.urgentTasks.get(0).getLatestStartTime()) {
+        Task result = allTasks.get(0);
+        remove(result);
+        return result;
+      }
+      // Otherwise, the method recommends the user to complete the first element in the urgentTasks
+      // list now.
+      else {
+        Task result = urgentTasks.get(0);
+        remove(result);
+        return result;
+      }
     }
+    return null;
+  }
 
-    // Otherwise, the method recommends the user to complete the first element in the urgentTasks
-    // list now.
-    else {
-      return urgentTasks.get(0);
+  //remove task from two lists
+  private void remove(Task targetTask) {
+    for (int i = 0; i < allTasks.size(); i++) {
+      if (allTasks.get(i) == targetTask) {
+        allTasks.remove(i);
+        break;
+      }
+    }
+    for (int i = 0; i < urgentTasks.size(); i++) {
+      if (urgentTasks.get(i) == targetTask) {
+        urgentTasks.remove(i);
+        break;
+      }
     }
   }
 
