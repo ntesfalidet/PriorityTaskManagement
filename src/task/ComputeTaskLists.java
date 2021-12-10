@@ -19,11 +19,6 @@ public class ComputeTaskLists {
 
   public ComputeTaskLists(List<Task> allTasks) {
     this.allTasks = allTasks;
-    sortAllTasks();
-    getUrgentTasks();
-    if (urgentTasks.size() > 0) {
-      sortUrgentTasks();
-    }
   }
 
   // Helper function for filtering out all the important tasks (tasks without deadlines) from
@@ -59,8 +54,10 @@ public class ComputeTaskLists {
 
   // This method sorts all the tasks by their importance scores (using merge sort)
   public void sortAllTasks() {
-    MergeSort mergeSort = new MergeSort(this.allTasks);
-    mergeSort.sort(0, this.allTasks.size() - 1, true);
+    if (this.allTasks.size() > 0) {
+      MergeSort mergeSort = new MergeSort(this.allTasks);
+      mergeSort.sort(0, this.allTasks.size() - 1, true);
+    }
   }
 
   // Helper function for adjusting the latest start times of urgent tasks
@@ -85,16 +82,19 @@ public class ComputeTaskLists {
     // Sorts the urgent tasks by their deadlines and if some urgent tasks have the same deadlines,
     // then we sort those urgent tasks by their importance score
     // (for debugging purposes)
-//    Collections.sort(this.urgentTasks, (a, b) -> (a.getDeadline().compareTo(b.getDeadline()) == 0
-//        ? b.getImportanceScore() - a.getImportanceScore() : a.getDeadline().compareTo(b.getDeadline())));
+    //Collections.sort(this.urgentTasks, (a, b) -> (a.getDeadline().compareTo(b.getDeadline()) == 0
+        //? b.getImportanceScore() - a.getImportanceScore() : a.getDeadline().compareTo(b.getDeadline())));
 
-    // Sorts the urgent tasks by only their deadlines (using merge sort)
-    MergeSort mergeSort = new MergeSort(this.urgentTasks);
-    mergeSort.sort(0, this.urgentTasks.size() - 1, false);
+    // If our urgent tasks list is not empty
+    if (urgentTasks.size() > 0) {
+      // Sorts the urgent tasks by only their deadlines (using merge sort)
+      MergeSort mergeSort = new MergeSort(this.urgentTasks);
+      mergeSort.sort(0, this.urgentTasks.size() - 1, false);
 
-    // Helper function is called here for adjusting the latest start times for any conflicting
-    // urgent tasks
-    this.adjustLatestStartTimes(this.urgentTasks, this.urgentTasks.size() - 1);
+      // Helper function is called here for adjusting the latest start times for any conflicting
+      // urgent tasks
+      this.adjustLatestStartTimes(this.urgentTasks, this.urgentTasks.size() - 1);
+    }
   }
 
   // This method is responsible for returning the recommended task, out of all the tasks, to
@@ -112,41 +112,43 @@ public class ComputeTaskLists {
     // Get current time of current date
     long currentTime = currentDate.getTime();
 
-    // Print out the current time in a specific date and time format (for debugging)
+    // Print out the current time in a specific date and time format
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM-dd-yyyy HH:mm");
     System.out.println("Current date and time: " + simpleDateFormat.format(currentDate));
 
-    if (allTasks.size() > 0) {
-      if (urgentTasks.size() == 0){
+    if (this.allTasks.size() > 0) {
+      // If urgent tasks list is empty then we recommend the most important task from all tasks
+      if (this.urgentTasks.size() == 0){
         Task result = allTasks.get(0);
         remove(result);
         return result;
-      } else if (currentTime + this.allTasks.get(0).getDuration() < this.urgentTasks.get(0).getLatestStartTime()) {
+      }
+      else if (currentTime + this.allTasks.get(0).getDuration() < this.urgentTasks.get(0).getLatestStartTime()) {
         Task result = allTasks.get(0);
-        remove(result);
+        this.remove(result);
         return result;
       }
       // Otherwise, the method recommends the user to complete the first element in the urgentTasks
       // list now.
       else {
         Task result = urgentTasks.get(0);
-        remove(result);
+        this.remove(result);
         return result;
       }
     }
     return null;
   }
 
-  //remove task from two lists
+  // remove task from two lists (all tasks and urgent tasks)
   private void remove(Task targetTask) {
     for (int i = 0; i < allTasks.size(); i++) {
-      if (allTasks.get(i) == targetTask) {
+      if (allTasks.get(i).getTaskName().equals(targetTask.getTaskName())) {
         allTasks.remove(i);
         break;
       }
     }
     for (int i = 0; i < urgentTasks.size(); i++) {
-      if (urgentTasks.get(i) == targetTask) {
+      if (urgentTasks.get(i).getTaskName().equals(targetTask.getTaskName())) {
         urgentTasks.remove(i);
         break;
       }
@@ -156,6 +158,10 @@ public class ComputeTaskLists {
   // Prints all tasks
   public String printAllTasks() {
     StringBuilder printAllTasksResult = new StringBuilder();
+    if (getAllTasks().size() == 0) {
+      printAllTasksResult.append("NO TASKS SO FAR\n");
+      return printAllTasksResult.toString();
+    }
     for (Task task: getAllTasks()) {
       printAllTasksResult.append(task.toString());
       printAllTasksResult.append("\n");
@@ -166,6 +172,10 @@ public class ComputeTaskLists {
   // Prints urgent tasks
   public String printUrgentTasks() {
     StringBuilder printUrgentTasksResult = new StringBuilder();
+    if (getUrgentTasks().size() == 0) {
+      printUrgentTasksResult.append("NO URGENT TASKS SO FAR\n");
+      return printUrgentTasksResult.toString();
+    }
     for (Task urgentTask: getUrgentTasks()) {
       printUrgentTasksResult.append(urgentTask.toString());
       printUrgentTasksResult.append("\n");
@@ -174,6 +184,7 @@ public class ComputeTaskLists {
   }
 
   // Prints important tasks
+  // (for debugging)
   public String printImportantTasks() {
     StringBuilder printImportantTasksResult = new StringBuilder();
     for (Task importantTask: getImportantTasks()) {
