@@ -12,19 +12,21 @@ public class TaskManagementTesting {
 
     // Test Case 1
 //    allTasks1.add(new Task("t1", 3, 9 * 60 * 60 * 1000,
-//        "11-21-2021 22:00"));
+//        "12-21-2021 22:00"));
 //    allTasks1.add(new Task("t2", 9, 7 * 60 * 60 * 1000,
-//        "11-21-2021 23:00"));
+//        "12-21-2021 23:00"));
 //    allTasks1.add(new Task("t3", 7, 3 * 60 * 60 * 1000,
-//        "11-30-2021 22:00"));
+//        "12-30-2021 22:00"));
 //    allTasks1.add(new Task("t4", 6, 1 * 60 * 60 * 1000,
-//        "11-30-2021 22:00"));
+//        "12-30-2021 22:00"));
 //    allTasks1.add(new Task("t5", 10, 5 * 60 * 60 * 1000,
 //        null));
 //    allTasks1.add(new Task("t6", 8, 3 * 60 * 60 * 1000,
 //        null));
 
     // Test Case 2 (for testing tasks with the same deadline and same duration)
+    // This case is for testing when the majority of tasks the user adds are urgent tasks
+    // that conflict with each other with respect to their deadlines and latest start times
 //    allTasks1.add(new Task("t1", 5, 3 * 60 * 60 * 1000,
 //        "12-12-2021 12:00"));
 //    allTasks1.add(new Task("t2", 8, 3 * 60 * 60 * 1000,
@@ -46,7 +48,7 @@ public class TaskManagementTesting {
     allTasks1.add(new Task("t3", 6, 3 * 60 * 60 * 1000,
         "12-12-2021 12:00"));
     allTasks1.add(new Task("t4", 1, 3 * 60 * 60 * 1000,
-        "12-12-2021 11:00"));
+        "12-12-2021 12:00"));
     allTasks1.add(new Task("t5", 9, 3 * 60 * 60 * 1000,
         "12-12-2021 12:00"));
     allTasks1.add(new Task("t6", 5, 3 * 60 * 60 * 1000,

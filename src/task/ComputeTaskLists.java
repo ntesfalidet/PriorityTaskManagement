@@ -187,6 +187,10 @@ public class ComputeTaskLists {
   // (for debugging)
   public String printImportantTasks() {
     StringBuilder printImportantTasksResult = new StringBuilder();
+    if (getImportantTasks().size() == 0) {
+      printImportantTasksResult.append("NO IMPORTANT TASKS SO FAR\n");
+      return printImportantTasksResult.toString();
+    }
     for (Task importantTask: getImportantTasks()) {
       printImportantTasksResult.append(importantTask.toString());
       printImportantTasksResult.append("\n");
