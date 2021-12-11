@@ -111,10 +111,12 @@ public class ComputeTaskLists {
   public Task recommendTask() {
     // We compare the first element in the allTasks list (sorted) and
     // the first element in the urgentTasks list.
-    // If the sum of the current time and the duration of the first element in the allTasks list
-    // is greater than or equal to the latest start time of the first element in the urgentTasks
-    // list, then the method recommends the user to complete the first element in the allTasks list
-    // now.
+    // If the sum of the current time and the duration of the first element (most important task)
+    // in the allTasks list is greater than or equal to the latest start time of the first element
+    // (most urgent task) in the urgentTasks list, then the method recommends the user to complete
+    // the first element (most important) in the allTasks list now.
+    // Otherwise, the method recommends the user to complete the first element (most urgent task)
+    // in the urgentTasks list.
 
     // Get current date (the date now)
     Date currentDate = new Date();

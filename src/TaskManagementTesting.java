@@ -11,18 +11,18 @@ public class TaskManagementTesting {
     ///////////////////////////////////// ALL THE TEST CASES /////////////////////////////////////
 
     // Test Case 1
-//    allTasks1.add(new Task("t1", 3, 9 * 60 * 60 * 1000,
-//        "12-21-2021 22:00"));
-//    allTasks1.add(new Task("t2", 9, 7 * 60 * 60 * 1000,
-//        "12-21-2021 23:00"));
-//    allTasks1.add(new Task("t3", 7, 3 * 60 * 60 * 1000,
-//        "12-30-2021 22:00"));
-//    allTasks1.add(new Task("t4", 6, 1 * 60 * 60 * 1000,
-//        "12-30-2021 22:00"));
-//    allTasks1.add(new Task("t5", 10, 5 * 60 * 60 * 1000,
-//        null));
-//    allTasks1.add(new Task("t6", 8, 3 * 60 * 60 * 1000,
-//        null));
+    allTasks1.add(new Task("t1", 3, 9 * 60 * 60 * 1000,
+        "12-21-2021 22:00"));
+    allTasks1.add(new Task("t2", 9, 7 * 60 * 60 * 1000,
+        "12-21-2021 23:00"));
+    allTasks1.add(new Task("t3", 7, 3 * 60 * 60 * 1000,
+        "12-30-2021 22:00"));
+    allTasks1.add(new Task("t4", 6, 1 * 60 * 60 * 1000,
+        "12-30-2021 22:00"));
+    allTasks1.add(new Task("t5", 10, 5 * 60 * 60 * 1000,
+        null));
+    allTasks1.add(new Task("t6", 8, 3 * 60 * 60 * 1000,
+        null));
 
     // Test Case 2 (for testing tasks with the same deadline and same duration)
     // This case is for testing when the majority of tasks the user adds are urgent tasks
@@ -41,22 +41,22 @@ public class TaskManagementTesting {
 //        null));
 
 //    // Test Case 3 (for testing tasks with the same deadline and same duration)
-    allTasks1.add(new Task("t1", 5, 3 * 60 * 60 * 1000,
-        "12-12-2021 12:00"));
-    allTasks1.add(new Task("t2", 8, 3 * 60 * 60 * 1000,
-        "12-12-2021 12:00"));
-    allTasks1.add(new Task("t3", 6, 3 * 60 * 60 * 1000,
-        "12-12-2021 12:00"));
-    allTasks1.add(new Task("t4", 1, 3 * 60 * 60 * 1000,
-        "12-12-2021 12:00"));
-    allTasks1.add(new Task("t5", 9, 3 * 60 * 60 * 1000,
-        "12-12-2021 12:00"));
-    allTasks1.add(new Task("t6", 5, 3 * 60 * 60 * 1000,
-        null));
+//    allTasks1.add(new Task("t1", 5, 3 * 60 * 60 * 1000,
+//        "12-12-2021 12:00"));
+//    allTasks1.add(new Task("t2", 8, 3 * 60 * 60 * 1000,
+//        "12-12-2021 12:00"));
+//    allTasks1.add(new Task("t3", 6, 3 * 60 * 60 * 1000,
+//        "12-12-2021 12:00"));
+//    allTasks1.add(new Task("t4", 1, 3 * 60 * 60 * 1000,
+//        "12-12-2021 12:00"));
+//    allTasks1.add(new Task("t5", 9, 3 * 60 * 60 * 1000,
+//        "12-12-2021 12:00"));
+//    allTasks1.add(new Task("t6", 5, 3 * 60 * 60 * 1000,
+//        null));
 
     // Test Case 4 (for testing the recommended task to complete now functionality)
 //    allTasks1.add(new Task("t1", 8, 3 * 60 * 60 * 1000,
-//        "12-09-2021 20:50"));  // 8:50 PM
+//        "12-10-2021 22:00"));  // 10:50 PM
 //    allTasks1.add(new Task("t2", 9, 3 * 60 * 60 * 1000,
 //        null));
 
@@ -77,11 +77,16 @@ public class TaskManagementTesting {
     // Call sortUrgentTasks() method to sort all the urgent tasks by their deadlines
     // from earliest to latest
     computeTaskLists.sortUrgentTasks();
+
+
     System.out.println("Your task list is divided into all tasks in sorted order "
         + "by their importance scores and all urgent tasks (tasks with deadlines)\n"
         + "in sorted order by their "
         + "deadlines "
-        + "and importance scores.\nUrgent tasks have adjusted latest start times "
+        + "and latest start times."
+        + "\nIf there are urgent tasks with the same deadline, then the urgent "
+        + "tasks are in sorted by their importance scores and latest start times."
+        + "\nUrgent tasks have adjusted latest start times "
         + "if the latest start times and deadlines of urgent tasks conflict with "
         + "each other.");
     System.out.println("************ ALL TASKS IN SORTED ORDER ************");
@@ -89,6 +94,8 @@ public class TaskManagementTesting {
     System.out.println("************ URGENT TASKS IN SORTED ORDER ************");
     System.out.println(computeTaskLists.printUrgentTasks());
 
+
+    // Uncomment this if you want to test for the recommmendation functionality //
     // For recommending a task to do now
     Task task = computeTaskLists.recommendTask();
     if (task != null) {
@@ -98,19 +105,26 @@ public class TaskManagementTesting {
           + "tasks list. However, you can view the removed task from your "
           + "history of tasks.");
     }
+    // Uncomment this if you want to test for the recommmendation functionality //
 
-    System.out.println("-------------------------------------------------------");
+    // Uncomment this if you want to test for the recommendation functionality //
+    System.out.println("\n---------------------------------------------------------------------------\n");
     System.out.println("Your task list is divided into all tasks in sorted order "
         + "by their importance scores and all urgent tasks (tasks with deadlines)\n"
         + "in sorted order by their "
         + "deadlines "
-        + "and importance scores.\nUrgent tasks have adjusted latest start times "
+        + "and latest start times."
+        + "\nIf there are urgent tasks with the same deadline, then the urgent "
+        + "tasks are in sorted by their importance scores and latest start times."
+        + "\nUrgent tasks have adjusted latest start times "
         + "if the latest start times and deadlines of urgent tasks conflict with "
         + "each other.");
     System.out.println("************ ALL TASKS IN SORTED ORDER ************");
     System.out.println(computeTaskLists.printAllTasks());
     System.out.println("************ URGENT TASKS IN SORTED ORDER ************");
     System.out.println(computeTaskLists.printUrgentTasks());
+    // Uncomment this if you want to test for the recommendation functionality //
+
 
 
     // FOR DEBUGGING PURPOSES
