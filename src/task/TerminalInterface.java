@@ -50,7 +50,10 @@ public class TerminalInterface {
                         + "by their importance scores and all urgent tasks (tasks with deadlines)\n"
                         + "in sorted order by their "
                         + "deadlines "
-                        + "and importance scores.\nUrgent tasks have adjusted latest start times "
+                        + "and latest start times."
+                        + "\nIf there are urgent tasks with the same deadline, then the urgent "
+                        + "tasks are in sorted by their importance scores and latest start times."
+                        + "\nUrgent tasks have adjusted latest start times "
                         + "if the latest start times and deadlines of urgent tasks conflict with "
                         + "each other.");
                     System.out.println("************ ALL TASKS IN SORTED ORDER ************");

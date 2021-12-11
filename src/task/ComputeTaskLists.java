@@ -61,6 +61,15 @@ public class ComputeTaskLists {
   }
 
   // Helper function for adjusting the latest start times of urgent tasks
+  // We check the last element (current element) in the sorted urgent tasks
+  // and compare its latest start time with the deadline of the second last element
+  // (previous element) in the sorted urgent tasks to see if there is a conflict time between the
+  // current element and the previous element (conflict time is defined by the difference between
+  // the deadline of the previous element (previous task) and the latest start time of the current
+  // element (current task)). If there is a conflict time between the current task and
+  // previous task, we move the latest start time of the previous task by the conflict time.
+  // We repeat this process going down the urgent tasks list from the second last element down to
+  // the first element (excluding the first element), if there are conflicts.
   private void adjustLatestStartTimes(List<Task> urgentTasks, int index) {
     if (index == 0) {
       return;
