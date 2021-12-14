@@ -56,7 +56,7 @@ public class TaskManagementTesting {
 
     // Test Case 4 (for testing the recommended task to complete now functionality)
 //    allTasks1.add(new Task("t1", 8, 3 * 60 * 60 * 1000,
-//        "12-10-2021 22:00"));  // 10:50 PM
+//        "12-10-2021 04:50"));  // 4:50 AM
 //    allTasks1.add(new Task("t2", 9, 3 * 60 * 60 * 1000,
 //        null));
 

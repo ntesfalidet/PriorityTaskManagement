@@ -4,7 +4,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-// MergeSort class for sorting a list of tasks
+// MergeSort class is used for sorting a list of tasks where there are types types
+// of lists of tasks.
+// If the list of tasks are all tasks (inputted by the user or through the test cases),
+// then we sort the list of tasks by their importance scores (from highest to lowest).
+// If the list of tasks are urgent tasks (tasks that are a subset of all tasks with deadlines
+// and latest start times), then we sort the list of tasks by their deadlines (from earliest to
 // When sorting a list of tasks by their importance score (from highest to lowest)
 public class MergeSort {
   private List<Task> tasksList = new ArrayList<>();
